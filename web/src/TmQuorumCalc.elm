@@ -2,38 +2,54 @@ module TmQuorumCalc exposing (main)
 
 import Browser
 import Html exposing (Html, button, div, text)
+import Platform.Sub
 
 
 type alias Model =
     { name : String }
 
 
-initialModel : Model
-initialModel =
-    { name = "" }
+initialModel : String -> ( Model, Cmd Msg )
+initialModel flag =
+    ( { name = flag }, Cmd.none )
 
 
 type Msg
     = NoOp
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        NoOp -> model
+        NoOp ->
+            ( model, Cmd.none )
 
 
-view : Model -> Html Msg
+type alias Document msg =
+    { title : String
+    , body : List (Html msg)
+    }
+
+
+view : Model -> Document Msg
 view model =
-    div []
-        [ 
+    { title = "test"
+    , body =
+        [ div []
+            []
         ]
+    }
 
 
-main : Program () Model Msg
 main =
-    Browser.sandbox
+    Browser.document
         { init = initialModel
         , view = view
         , update = update
+        , subscriptions = subscriptions
         }
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
