@@ -6,18 +6,20 @@ import Platform.Sub
 
 
 type alias Model =
-    { name : String }
+    { title : String
+    ,name : String 
+    }
 
 
 initialModel : String -> ( Model, Cmd Msg )
 initialModel flag =
-    ( { name = flag }, Cmd.none )
+    ( { name = flag, title = "Toastmasters Quorum Calculator" }, Cmd.none )
 
 
 type Msg
     = NoOp
 
-
+ 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
@@ -33,12 +35,12 @@ type alias Document msg =
 
 view : Model -> Document Msg
 view model =
-    { title = "test"
+    { title = model.title
     , body =
         [ div []
             []
         ]
-    }
+    } 
 
 
 main =

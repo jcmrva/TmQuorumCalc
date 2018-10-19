@@ -129,14 +129,14 @@ type Majority
     | TwoThirds Quorum
 
 
-officerCount : Members -> Int
-officerCount m =
-    case m of
-        Count c ->
-            c.members - c.vacancyAdjustment
+-- officerCount : Members -> Int
+-- officerCount m =
+--     case m of
+--         Count c ->
+--             c.members - c.vacancyAdjustment
 
-        Names n ->
-            List.length n
+--         Names n ->
+--             List.length n
 
 
 quorum : Int -> Quorum
@@ -148,13 +148,14 @@ quorum eligible =
         half =
             toFloat eligible / 2
 
-        p1 =
+        p1 = 
             floor half + 1
 
         rndUp =
             ceiling half
     in
         if eligible |> isEven then
-            PlusOne (fromFloat half) p1 ((fromFloat half) ++ " + 1 = " ++ (fromInt p1))
+            PlusOne (round half) p1 ((String.fromFloat half) ++ " + 1 = " ++ (String.fromInt p1))
         else
-            Rounded half rndUp ((fromFloat half) ++ " rounded up = " ++ (fromInt rndUp))
+            Rounded half rndUp ((String.fromFloat half) ++ " rounded up = " ++ (String.fromInt rndUp))
+ 
